@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Place model."""
 
 from models.base_model import BaseModel

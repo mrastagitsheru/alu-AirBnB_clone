@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Base model shared by all application entities."""
 
 from datetime import datetime
@@ -20,17 +21,21 @@ class BaseModel:
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
+        from models import storage
+
+        storage.new(self)
 
     def __str__(self):
         """Return a readable representation of the model."""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__
+        )
 
     def save(self):
         """Update the modification timestamp and persist the model."""
         self.updated_at = datetime.now()
-        from models.engine.file_storage import storage
+        from models import storage
 
-        storage.new(self)
         storage.save()
 
     def to_dict(self):

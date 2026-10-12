@@ -152,7 +152,7 @@ class HBNBCommand(cmd.Cmd):
         elif isinstance(current_value, float):
             value = float(value)
         setattr(instance, attribute, value)
-        storage.save()
+        instance.save()
 
 
 if __name__ == "__main__":
